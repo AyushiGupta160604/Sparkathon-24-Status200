@@ -7,55 +7,66 @@ body {
     width: 100%;
     font-family: 'Arial', sans-serif;
 }
-.container {
+.containerRegister {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    max-height: 500px;
 }
-form {
+
+.formRegister {
     text-align: center;
     width: 100%; 
     max-width: 400px; 
     margin: 0 auto; 
 }
+
 input[type="submit"] {
-     width: 100%; 
-     box-sizing: border-box;
-     padding: 10px; 
-     margin-bottom: 10px;
- }
- input[type="submit"] {
-     background-color: black;
-     color: white;
- }
- input[type="checkbox"] {
-     margin-right: 10px;
- }
- label {
+    width: 100%; 
+    box-sizing: border-box;
+    padding: 10px; 
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    background-color: black;
+    color: white;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+label {
     display: inline-block;
     margin-bottom: 10px;
 }
+
 html, body {
     overflow: auto;
 }
+
 input[type="password"],
 input[type="date"],
 input[type="tel"],
 input[type="textarea"],
 input[type="textarea"],
 input[type="email"],
-select {
+
+#countryCode, #emailRegister, #titleRegister, #ButtonRegister {
     width: 100%;
     box-sizing: border-box;
     padding: 10px;
     margin-bottom: 10px;
 }
+
 .input-group {
     display: flex;
     justify-content: space-between;
     gap: 10px;
 }
+
 input[type="text"] {
     width: 100%;
     box-sizing: border-box;

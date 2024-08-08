@@ -11,7 +11,6 @@ const Home = () => {
 
   return (
     <div className="App">
-      <NavBar />
       <div className="container">
         <h1>Products</h1>
         <div className="product-list">
@@ -24,16 +23,7 @@ const Home = () => {
   );
 };
 
-const NavBar = () => (
-  <nav className="navbar">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/products">Products</a></li>
-      <li><a href="/cart">Cart</a></li>
-      <li><a href="/contact">Contact</a></li>
-    </ul>
-  </nav>
-);
+
 
 const ProductCard = ({ product }) => (
   <div className="product-card">

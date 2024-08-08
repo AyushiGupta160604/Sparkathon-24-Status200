@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './css/register.css'; // Make sure to add your CSS styles here
+import './css/register.css';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -29,14 +29,14 @@ const Register = () => {
       };
     
       return (
-        <div className="container">
-          <form onSubmit={handleSubmit}>
+        <div className="containerRegister">
+          <form className="formRegister" onSubmit={handleSubmit}>
             <h2>Create your personal account</h2>
             <p>
-              You are about to create your account. This will allow us to offer you a personalized and tailored experience online, provide you with products, services and information you request from us, communicate with you, and give you access to exclusive services and benefits reserved for registered members to the HUMBLE HOME Group customer database.
+              You are about to create your account. This will allow us to offer you a personalized and tailored experience online, provide you with products, services and information you request from us, communicate with you, and give you access to exclusive services and benefits reserved for registered members to our customer database.
             </p>
             <label htmlFor="title"></label>
-            <select id="title" name="title" value={formData.title} onChange={handleChange} required>
+            <select id="titleRegister" name="title" value={formData.title} onChange={handleChange} required>
               <option disabled value="">Select Title</option>
               <option value="Mr">Mr</option>
               <option value="Mrs">Mrs</option>
@@ -71,16 +71,17 @@ const Register = () => {
             <input type="password" id="password" name="password" placeholder="Password*" value={formData.password} onChange={handleChange} required />
             <br /><br />
             <label htmlFor="email"></label>
-            <input type="email" id="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required />
+            <input type="email" id="emailRegister" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required />
             <br />
             <p>
               By clicking on 'Register', you confirm that you have read and understood our <u>Privacy Statement</u>, and you want to register and accept our terms and services.
             </p>
             <label htmlFor="Button"></label>
-            <input type="submit" value="Register" id="Button" />
+            <input type="submit" value="Register" id="ButtonRegister" />
           </form>
         </div>
       );
 };
+
 
 export default Register;

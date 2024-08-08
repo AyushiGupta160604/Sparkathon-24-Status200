@@ -1,0 +1,82 @@
+/* Profile.css */
+.profile-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-content {
+    display: flex;
+    gap: 20px;
+}
+
+.profile-sidebar {
+    flex: 1;
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.edit-profile-btn {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.edit-profile-btn:hover {
+    background-color: #0056b3;
+}
+
+.profile-main {
+    flex: 2;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-main h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.order-history,
+.saved-items {
+    list-style-type: none;
+    padding: 0;
+}
+
+.order-history li,
+.saved-items li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.order-history li:last-child,
+.saved-items li:last-child {
+    border-bottom: none;
+}
