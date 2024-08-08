@@ -1,0 +1,15 @@
+    html {
+        filter: url('#none-filter');
+    }
+
+    html {
+        filter: url('#protanopia-filter');
+    }
+
+    html {
+        filter: url('#deuteranopia-filter');
+    }
+    
+    html {
+        filter: url('#tritanopia-filter');
+    }      

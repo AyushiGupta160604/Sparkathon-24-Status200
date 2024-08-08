@@ -1,0 +1,25 @@
+{
+    "manifest_version": 3,
+    "name": "Color Blindness Assistant",
+    "version": "1.0",
+    "description": "Adjusts webpage colors to make them more accessible for users with color blindness.",
+    "permissions": ["activeTab", "storage", "tabs", "scripting"],
+    "action": {
+      "default_popup": "popup/popup.html",
+      "default_icon": "icons/icon.png"
+    },
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content/content.js"],
+        "css": ["content/content.css"]
+      }
+    ],
+    "options_page": "options/options.html",
+    "icons": {
+      "128": "icons/icon.png"
+    }
+  }  
