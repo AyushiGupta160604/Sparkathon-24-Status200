@@ -9,15 +9,21 @@ body {
 
   }
   
-  form {
+  #loginpage {
     text-align: center;
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
     padding-right: 100px; 
-    margin-left: -70px; 
-    
+    margin-left: -70px;    
   }
+
+  #emailHeading {
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    margin-left: 35%;
+}
   
   input[type="email"],
   input[type="submit"] {
@@ -31,4 +37,3 @@ body {
     background-color: black;
     color: white;
   }
-  
