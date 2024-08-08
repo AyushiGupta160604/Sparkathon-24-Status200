@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './css/home.css';
 
 const Home = () => {
@@ -8,6 +8,14 @@ const Home = () => {
     { id: 3, name: 'Product 3', price: '$30.00', description: 'Description of Product 3' },
     // Add more products as needed
   ];
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch(" http://localhost:7000/api")
+      .then((res) => res.json())
+      .then((data) => setData(data.message))
+      .catch((error) => console.log("Error fetching message:", error));
+  }, []);
 
   return (
     <div className="App">

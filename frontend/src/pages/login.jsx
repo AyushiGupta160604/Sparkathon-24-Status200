@@ -15,18 +15,27 @@ const Login = () => {
       alert('Please fill out the email address.');
       return;
     }
-
     try {
-      const response = await fetch(`/verify-email?email=${email}`);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+      const response = await fetch('http://localhost:7000/api/login', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(email),
+      });
+
+      if (response.ok) {
+          const data = await response.json();
+          console.log('Login Successful:', data);
+          window.location.href = '/profile';
+          // You can redirect the user or show a success message here
+      } else {
+          console.error('Login Failed');
+          // Handle the error response here
       }
-      const { redirectTo } = await response.json();
-      window.location.href = redirectTo;
-    } catch (error) {
+  } catch (error) {
       console.error('Error:', error);
-      // Handle error (e.g., display error message to the user)
-    }
+  }
   };
 
   return (
@@ -37,7 +46,7 @@ const Login = () => {
         <input
           type="email"
           id="email"
-          name="Email"
+          name="email"
           placeholder="Email address"
           value={email}
           onChange={handleChange}

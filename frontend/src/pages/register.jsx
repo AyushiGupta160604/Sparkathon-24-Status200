@@ -22,11 +22,32 @@ const Register = () => {
         });
       };
     
-      const handleSubmit = (e) => {
+      const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission
-        console.log(formData);
-      };
+    
+        try {
+            const response = await fetch('http://localhost:7000/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+    
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Registration Successful:', data);
+                window.location.href = '/profile';
+                // You can redirect the user or show a success message here
+            } else {
+                console.error('Registration Failed');
+                // Handle the error response here
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+    
     
       return (
         <div className="containerRegister">
