@@ -32,7 +32,7 @@ const Login = () => {
   return (
     <div className="container">
       <form id="loginpage" onSubmit={handleSubmit}>
-        <h3>Enter your email</h3>
+        <h3 id="emailHeading">Enter your email</h3>
         <label htmlFor="email"></label>
         <input
           type="email"
@@ -55,5 +55,7 @@ const Login = () => {
     </div>
   );
 };
+
+export default Login;
 
 export default Login;
