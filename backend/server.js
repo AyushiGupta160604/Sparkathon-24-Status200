@@ -1,3 +1,5 @@
+require('dotenv').config(); // This should be at the top of your entry file
+
 const express = require("express");
 const router = require("../backend/router/authrouter.js");
 const cors=require("cors");

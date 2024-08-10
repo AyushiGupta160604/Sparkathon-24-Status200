@@ -4,6 +4,7 @@ import Register from "./pages/register";
 import Login from "./pages/login";
 import Home from "./pages/Home";
 import Profile from "./pages/profile";
+import LED from "./pages/led"
 import NavBar from './pages/NavBar';
 const App = () => {
   const [data, setData] = useState(null);
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/products" element={<LED/>}/>
       </Routes>
     </Router>
   );
