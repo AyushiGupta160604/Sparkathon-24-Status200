@@ -12,31 +12,40 @@ const Login = () => {
     e.preventDefault();
 
     if (email.trim() === '') {
-      alert('Please fill out the email address.');
-      return;
+        alert('Please fill out the email address.');
+        return;
     }
-    try {
-      const response = await fetch('http://localhost:7000/api/login', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(email),
-      });
 
-      if (response.ok) {
-          const data = await response.json();
-          console.log('Login Successful:', data);
-          window.location.href = '/profile';
-          // You can redirect the user or show a success message here
-      } else {
-          console.error('Login Failed');
-          // Handle the error response here
-      }
-  } catch (error) {
-      console.error('Error:', error);
-  }
-  };
+    try {
+        const response = await fetch('http://localhost:7000/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: email }), // Sending email as an object
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+
+            if (data.redirectTo === '/profile') {
+                // Redirect to profile page if user is registered
+                window.location.href = '/profile';
+            } else if (data.redirectTo === '/register') {
+                // Redirect to register page if user is not registered
+                window.location.href = '/register';
+            } else {
+                console.error('Unexpected redirect URL:', data.redirectTo);
+            }
+        } else {
+            console.error('Login Failed');
+            // Handle error response here, like showing an error message
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
+
 
   return (
     <div className="container">

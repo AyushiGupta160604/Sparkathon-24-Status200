@@ -5,6 +5,7 @@ require("../DB/connect.js");
 router.route("/").get(authControl.home);
 router.route("/register").post(authControl.register);
 router.route("/login").post(authControl.login);
-router.route("/").get(authControl.home);
+router.route("/profile").get(authControl.profile);
+router.route("/cart").post(authControl.addToCart);
 
 module.exports = router;
