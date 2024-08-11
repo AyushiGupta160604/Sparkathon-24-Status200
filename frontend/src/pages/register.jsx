@@ -21,10 +21,9 @@ const Register = () => {
           [name]: type === 'checkbox' ? checked : value,
         });
       };
-    
       const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         try {
             const response = await fetch('http://localhost:7000/api/register', {
                 method: 'POST',
@@ -33,23 +32,20 @@ const Register = () => {
                 },
                 body: JSON.stringify(formData),
             });
-    
+
             if (response.ok) {
                 const data = await response.json();
-                console.log('Registration Successful:', data);
+                localStorage.setItem('token', data.token); // Store the token
                 window.location.href = '/profile';
-                // You can redirect the user or show a success message here
             } else {
                 console.error('Registration Failed');
-                // Handle the error response here
             }
         } catch (error) {
             console.error('Error:', error);
         }
     };
     
-    
-      return (
+         return (
         <div className="containerRegister">
           <form className="formRegister" onSubmit={handleSubmit}>
             <h2>Create your personal account</h2>

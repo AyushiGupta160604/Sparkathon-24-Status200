@@ -9,11 +9,17 @@ const Profile = () => {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const userId = '66b5177a5b1bd1a02685c1c1';  // Replace with actual user ID or dynamic value
-                const response = await fetch(`http://localhost:7000/api/profile?userId=${userId}`);
+                const token = localStorage.getItem('token'); // Get token from local storage
+                const response = await fetch('http://localhost:7000/api/profile', {
+                    headers: {
+                        'Authorization': `Bearer ${token}` // Include token in request headers
+                    }
+                });
+
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
+
                 const data = await response.json();
                 setUserData(data);
                 setLoading(false);
@@ -41,16 +47,13 @@ const Profile = () => {
                     <h2 id="firstname">{userData.firstname}</h2>
                     <h2 id="lastname">{userData.lastname}</h2>
                     <p id="userEmail">Email: {userData.email}</p>
-                    <p id='countryCode'>Country Code: {userData.countryCode}</p>
+                    <p id="countryCode">Country Code: {userData.countryCode}</p>
                     <p id="userPhone">Phone: {userData.phone}</p>
                     <button className="edit-profile-btn">Edit Profile</button>
                 </div>
-               
             </div>
         </div>
     );
 };
-
-
 
 export default Profile;
