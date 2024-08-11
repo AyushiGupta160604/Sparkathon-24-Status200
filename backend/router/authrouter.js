@@ -7,7 +7,12 @@ router.route("/").get(authControl.home);
 router.route("/register").post(authControl.register);
 router.route("/login").post(authControl.login);
 router.route("/profile").get(authenticate,authControl.profile);
-router.route("/cart").post(authControl.addToCart);
+router.route("/cart")
+    .get(authenticate, authControl.getCart)
+    .post(authenticate, authControl.addToCart)
+    .delete(authenticate, authControl.removeFromCart);
+
+
 router.route("/product").get(authControl.Product);
 router.route("/products").get(authControl.LED);
 

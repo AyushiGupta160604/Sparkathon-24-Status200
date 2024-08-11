@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const Product = require("../model/towel.js"); // Import your towel model
 const LED = require("../model/led.js"); // Import your Product model
+const Cart = require('../model/cart');
 
 exports.home=async(req,res)=>{
     try{
@@ -126,26 +127,72 @@ exports.profile = async (req, res) => {
     }
 };
 exports.addToCart = async (req, res) => {
-    try {
-        if (!req.user || !req.user.id) {
-            return res.status(401).json({ error: 'Unauthorized: User ID is missing' });
-        }
-        const userId = req.user.id;
-        const productId = req.body.productId;
+    const { productId } = req.body;
+    const userId = req.user.userId; // Get userId from authenticated user
 
-        const user = await User.findById(userId);
-        if (user) {
-            user.savedItems.push(productId);
-            await user.save();
-            res.json({ message: 'Item added to cart' });
+    try {
+        let cart = await Cart.findOne({ userId });
+
+        if (cart) {
+            // Check if product already exists in cart
+            let itemIndex = cart.products.findIndex(p => p.productId.toString() === productId);
+            if (itemIndex > -1) {
+                // Product exists, update quantity
+                cart.products[itemIndex].quantity += 1;
+            } else {
+                // Product does not exist, add as new item
+                cart.products.push({ productId, quantity: 1 });
+            }
         } else {
-            res.status(404).json({ error: 'User not found' });
+            // Create a new cart for the user
+            cart = new Cart({
+                userId,
+                products: [{ productId, quantity: 1 }]
+            });
         }
+
+        cart = await cart.save();
+        res.status(200).json(cart);
     } catch (error) {
-        console.error('Error adding item to cart:', error);
-        res.status(500).json({ error: 'An error occurred' });
+        console.error('Error adding to cart:', error);
+        res.status(500).json({ error: 'An error occurred while adding to cart' });
     }
 };
+exports.getCart = async (req, res) => {
+    const userId = req.user.userId; // Get userId from authenticated user
+
+    try {
+        const cart = await Cart.findOne({ userId }).populate('products.productId');
+        if (cart) {
+            res.status(200).json(cart);
+        } else {
+            res.status(404).json({ message: 'Cart not found' });
+        }
+    } catch (error) {
+        console.error('Error fetching cart:', error);
+        res.status(500).json({ error: 'An error occurred while fetching the cart' });
+    }
+};
+exports.removeFromCart = async (req, res) => {
+    const { productId } = req.body;
+    const userId = req.user.userId; // Get userId from authenticated user
+
+    try {
+        let cart = await Cart.findOne({ userId });
+
+        if (cart) {
+            cart.products = cart.products.filter(p => p.productId.toString() !== productId);
+            cart = await cart.save();
+            res.status(200).json(cart);
+        } else {
+            res.status(404).json({ message: 'Cart not found' });
+        }
+    } catch (error) {
+        console.error('Error removing from cart:', error);
+        res.status(500).json({ error: 'An error occurred while removing from cart' });
+    }
+};
+
 exports.Product=async(req,res)=>{
     try {
         // Fetch all items from the "product" collection in MongoDB

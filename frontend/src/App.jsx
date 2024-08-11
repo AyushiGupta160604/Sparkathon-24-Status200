@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/profile";
 import LED from "./pages/led"
 import NavBar from './pages/NavBar';
+import Cart from './pages/Cart';
 const App = () => {
   const [data, setData] = useState(null);
 
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/products" element={<LED/>}/>
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </Router>
   );

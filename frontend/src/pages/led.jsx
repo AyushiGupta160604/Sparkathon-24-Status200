@@ -22,6 +22,26 @@ const TableLampsPage = () => {
             });
     }, []);
 
+    const handleAddToCart = (productId, brand, image, productType, price) => {
+        // Update local cart state
+        const updatedCart = [...cart, { productId, brand, image, productType, price }];
+        setCart(updatedCart);
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+        // Send to backend (optional, if you want to keep cart in backend as well)
+        fetch('http://localhost:7000/api/cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ productId })
+        })
+            .then(res => res.json())
+            .then(data => console.log('Product added to cart:', data))
+            .catch(err => console.error('Error adding to cart:', err));
+    };
+
     return (
         <div>
             <header>
@@ -30,7 +50,7 @@ const TableLampsPage = () => {
 
             <main id="productContainer">
                 {products.map(product => (
-                    <div key={product.Image} className="product">
+                    <div key={product._id} className="product">
                         <img src={product.Image} alt={`Product Image: ${product.Brand}`} />
                         <div className="product-info">
                             <h2>{product.Brand}</h2>
@@ -39,9 +59,9 @@ const TableLampsPage = () => {
                             <p>Rating: {product.Rating}</p>
                             <button 
                                 className="add-to-cart-button"
-                                onClick={() => addToCart(product.Brand, product.Image, product["Product Type"], product.Price)}
+                                onClick={() => handleAddToCart(product._id, product.Brand, product.Image, product["Product Type"], product.Price)}
                             >
-                                Add to Wishlist
+                                Add to Cart
                             </button>
                         </div>
                     </div>
