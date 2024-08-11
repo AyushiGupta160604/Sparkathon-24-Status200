@@ -33,6 +33,20 @@ const Profile = () => {
         fetchProfile();
     }, []);
 
+    const handleSignOut = () => {
+        // Clear localStorage
+        localStorage.removeItem('token');
+        localStorage.removeItem('firstname');
+        localStorage.removeItem('lastname');
+        localStorage.removeItem('email');
+        localStorage.removeItem('CountryCode');
+        localStorage.removeItem('phone');
+        localStorage.removeItem('userId');
+        
+        // Redirect to login page
+        window.location.href = '/login';
+    };
+
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
     if (!userData) return <div>No user data available</div>;
@@ -52,6 +66,7 @@ const Profile = () => {
                     <button className="edit-profile-btn">Edit Profile</button>
                 </div>
             </div>
+            <button className="signout-button" onClick={handleSignOut}>Sign Out</button>
         </div>
     );
 };

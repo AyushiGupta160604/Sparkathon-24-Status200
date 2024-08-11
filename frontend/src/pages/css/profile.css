@@ -105,3 +105,18 @@
 .saved-items li:last-child {
     border-bottom: none;
 }
+.signout-button {
+    background-color: black; /* Red color for the button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.signout-button:hover {
+    background-color: gray; /* Darker red on hover */
+}
