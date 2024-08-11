@@ -5,8 +5,8 @@ import torch
 app = Flask(__name__)
 
 # Load the model and tokenizer
-model = BertForSequenceClassification.from_pretrained('C:/Users/agast/OneDrive/Desktop/MCTS-main/MCTS-main/Classification Model/model2')
-tokenizer = BertTokenizer.from_pretrained('C:/Users/agast/OneDrive/Desktop/MCTS-main/MCTS-main/Classification Model/tokenizer2')
+model = BertForSequenceClassification.from_pretrained('/MCTS-main/MCTS-main/Classification Model/model2')
+tokenizer = BertTokenizer.from_pretrained('/MCTS-main/MCTS-main/Classification Model/tokenizer2')
 
 def classify_text(text, model, tokenizer, max_len=128):
     encoding = tokenizer.encode_plus(
