@@ -15,6 +15,17 @@ exports.home=async(req,res)=>{
 }
 exports.register=async(req,res)=>{
     try{
+        const { email, phone } = req.body;
+
+        // Check if the user already exists by email or phone number
+        const existingUser = await User.findOne({ $or: [{ email }, { phone }] });
+
+        if (existingUser) {
+            return res.status(409).json({
+                message: "User already registered. Please login.",
+                redirectTo: "/login"
+            });
+        }
         const registers = new User({
             title:req.body.title,
             firstname:req.body.firstname,
