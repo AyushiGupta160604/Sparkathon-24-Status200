@@ -11,9 +11,6 @@ router.route("/cart")
     .get(authenticate, authControl.getCart)
     .post(authenticate, authControl.addToCart)
     .delete(authenticate, authControl.removeFromCart);
-
-
-router.route("/product").get(authControl.Product);
 router.route("/products").get(authControl.LED);
 
 

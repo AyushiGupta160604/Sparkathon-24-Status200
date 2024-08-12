@@ -1,17 +1,19 @@
 const User = require('../model/schema.js');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
-const Product = require("../model/towel.js"); // Import your towel model
+const Product = require("../model/product.js"); // Import your towel model
 const LED = require("../model/led.js"); // Import your Product model
 const Cart = require('../model/cart');
 
 exports.home=async(req,res)=>{
-    try{
-       console.log("welcome to home page");
-       
-    }catch(error){
-        console.error('Error fetching problems:', error);
-        res.status(500).send('Internal Server Error');
+    try {
+        // Fetch all items from the "product" collection in MongoDB
+        const products = await Product.find({});
+        // Send the items data as a JSON response to the frontend
+        res.json(products);
+    } catch (error) {
+        console.error('Error fetching items:', error);
+        res.status(500).json({ error: 'An error occurred while fetching items' });
     }
 }
 exports.register=async(req,res)=>{
@@ -193,17 +195,6 @@ exports.removeFromCart = async (req, res) => {
     }
 };
 
-exports.Product=async(req,res)=>{
-    try {
-        // Fetch all items from the "product" collection in MongoDB
-        const products = await Product.find({});
-        // Send the items data as a JSON response to the frontend
-        res.json(products);
-    } catch (error) {
-        console.error('Error fetching items:', error);
-        res.status(500).json({ error: 'An error occurred while fetching items' });
-    }
-}
 exports.LED=async(req,res)=>{
     try {
         // Fetch all items from the "product" collection in MongoDB

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../pages/css/towel.css'; // Import CSS styles
+import '../pages/css/led.css'; // Import CSS styles
 
 const TableLampsPage = () => {
     const [products, setProducts] = useState([]);
@@ -45,7 +45,7 @@ const TableLampsPage = () => {
     return (
         <div>
             <header>
-                <h1>Towel Page</h1>
+                <h1>LED Page</h1>
             </header>
 
             <main id="productContainer">
@@ -55,7 +55,7 @@ const TableLampsPage = () => {
                         <div className="product-info">
                             <h2>{product.Brand}</h2>
                             <p>{product["Product Type"]}</p>
-                            <p>Price: ₹{product.Price}</p>
+                            <p>Price: ${product.Price}</p>
                             <p>Rating: {product.Rating}</p>
                             <button 
                                 className="add-to-cart-button"

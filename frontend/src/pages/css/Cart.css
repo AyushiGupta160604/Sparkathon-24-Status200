@@ -4,6 +4,8 @@
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
+    max-height: 500px; /* Set a maximum height */
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .cart-item {

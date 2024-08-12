@@ -1,60 +1,78 @@
-import React from 'react';
-import './css/home.css';
+import React, { useEffect, useState } from 'react';
+import '../pages/css/led.css'; // Import CSS styles
 
-const Home = () => {
-    const products = [
-        { id: 1, name: 'Product 1', price: '$10.00', description: 'Description of Product 1' },
-        { id: 2, name: 'Product 2', price: '$20.00', description: 'Description of Product 2' },
-        { id: 3, name: 'Product 3', price: '$30.00', description: 'Description of Product 3' },
-        { id: 4, name: 'Product 4', price: '$40.00', description: 'Description of Product 4' },
-        { id: 5, name: 'Product 5', price: '$25.00', description: 'Description of Product 5' },
-        { id: 6, name: 'Product 6', price: '$310.00', description: 'Description of Product 6' },
-        { id: 7, name: 'Product 7', price: '$100.00', description: 'Description of Product 7' },
-        { id: 8, name: 'Product 8', price: '$25.00', description: 'Description of Product 8' },
-        { id: 9, name: 'Product 9', price: '$310.00', description: 'Description of Product 9' },
-        { id: 10, name: 'Product 10', price: '$100.00', description: 'Description of Product 10' },
-    ];
+const HomePage = () => {
+    const [products, setProducts] = useState([]);
+    const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
 
-    const handleAddToCart = async (productId) => {
-        try {
-            const response = await fetch('http://localhost:7000/api/cart', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // Include any authentication headers if required
-                },
-                body: JSON.stringify({ productId }),
+    useEffect(() => {
+        // Fetch product data
+        fetch('http://localhost:7000/api')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setProducts(data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
             });
+    }, []);
 
-            if (response.ok) {
-                console.log('Item added to cart');
-            } else {
-                console.error('Failed to add item to cart');
-            }
-        } catch (error) {
-            console.error('Error adding item to cart:', error);
-        }
+    const handleAddToCart = (productId, brand, image, productType, price) => {
+        // Update local cart state
+        const updatedCart = [...cart, { productId, brand, image, productType, price }];
+        setCart(updatedCart);
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+        // Send to backend (optional, if you want to keep cart in backend as well)
+        fetch('http://localhost:7000/api/cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ productId })
+        })
+            .then(res => res.json())
+            .then(data => console.log('Product added to cart:', data))
+            .catch(err => console.error('Error adding to cart:', err));
     };
 
     return (
-        <div className="container">
-            <h1>Products</h1>
-            <div className="product-list">
+        <div>
+            <header>
+                <h1>LED Page</h1>
+            </header>
+
+            <main id="productContainer">
                 {products.map(product => (
-                    <ProductCard key={product.id} product={product} onAddToCart={handleAddToCart} />
+                    <div key={product._id} className="product">
+                        <img src={product.Image} alt={`Product Image: ${product.Brand}`} />
+                        <div className="product-info">
+                            <h2>{product.Brand}</h2>
+                            <p>{product["Product Type"]}</p>
+                            <p>Price: ${product.Price}</p>
+                            <p>Rating: {product.Rating}</p>
+                            <button 
+                                className="add-to-cart-button"
+                                onClick={() => handleAddToCart(product._id, product.Brand, product.Image, product["Product Type"], product.Price)}
+                            >
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
                 ))}
-            </div>
+            </main>
+
+            <footer>
+                <p>&copy; 2024 Humble Home. All rights reserved.</p>
+            </footer>
         </div>
     );
 };
 
-const ProductCard = ({ product, onAddToCart }) => (
-    <div className="product-card">
-        <h2>{product.name}</h2>
-        <p>{product.price}</p>
-        <p>{product.description}</p>
-        <button onClick={() => onAddToCart(product.id)}>Add to Cart</button>
-    </div>
-);
-
-export default Home;
+export default HomePage;
