@@ -12,6 +12,7 @@ router.route("/cart")
     .post(authenticate, authControl.addToCart)
     .delete(authenticate, authControl.removeFromCart);
 router.route("/products").get(authControl.LED);
-
+router.route('/placeorder').post(authenticate,authControl.placeorder);
+router.route('/getUserOrders ').post(authenticate,authControl.getUserOrders);
 
 module.exports = router;

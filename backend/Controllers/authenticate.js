@@ -9,12 +9,12 @@ const authenticateJWT = (req, res, next) => {
         jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
             if (err) {
                 console.error('JWT verification error:', err);
-                return res.sendStatus(403);  // Forbidden
+                return res.status(403).json({ error: 'Invalid or expired token' });  // More descriptive
             }
 
             if (!user || !user.userId) {
                 console.error('JWT token does not contain userId');
-                return res.sendStatus(403);  // Forbidden
+                return res.status(403).json({ error: 'Invalid token data' });  // More descriptive
             }
 
             req.user = user;  // Attach user info to req
@@ -22,7 +22,7 @@ const authenticateJWT = (req, res, next) => {
         });
     } else {
         console.error('No Authorization header provided');
-        res.sendStatus(401);  // Unauthorized
+        res.status(401).json({ error: 'Authorization header is missing' });  // More descriptive
     }
 };
 

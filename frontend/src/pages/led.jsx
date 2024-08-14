@@ -45,7 +45,7 @@ const TableLampsPage = () => {
     return (
         <div>
             <header>
-                <h1>LED Page</h1>
+                <h1>  </h1>
             </header>
 
             <main id="productContainer">

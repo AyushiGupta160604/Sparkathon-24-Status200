@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const Product = require("../model/product.js"); // Import your towel model
 const LED = require("../model/led.js"); // Import your Product model
 const Cart = require('../model/cart');
+const Order = require("../model/order.js");
 
 exports.home=async(req,res)=>{
     try {
@@ -206,3 +207,47 @@ exports.LED=async(req,res)=>{
         res.status(500).json({ error: 'An error occurred while fetching items' });
     }
 }
+exports.placeorder = async (req, res) => {
+    const {products, cart, address, paymentMethod } = req.body;
+
+    console.log('Received Data:', { products, cart, address, paymentMethod });
+
+    try {
+        if (!cart || !address || !paymentMethod) {
+            return res.status(400).json({ error: 'All fields are required' });
+        }
+
+        // Check for products in cart
+        if (!Array.isArray(cart) || cart.length === 0) {
+            return res.status(400).json({ error: 'Cart is empty' });
+        }
+
+        const order = new Order({
+            user: req.user.userId,
+            products,
+            cart,
+            address,
+            paymentMethod,
+            status: 'Pending'
+        });
+
+        const savedOrder = await order.save();
+        res.status(200).json({ success: true, order: savedOrder });
+    } catch (error) {
+        console.error('Error placing order:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+// Add this route in your backend
+exports.getUserOrders = async (req, res) => {
+    try {
+        const userId = req.user.userId; // Extract from JWT
+        const orders = await Order.find({ user: userId }).populate('products.productId');
+
+        res.status(200).json(orders);
+    } catch (error) {
+        console.error('Error fetching orders:', error);
+        res.status(500).json({ error: 'An error occurred while fetching orders' });
+    }
+};
