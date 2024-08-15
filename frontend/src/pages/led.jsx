@@ -1,5 +1,6 @@
+
 import React, { useEffect, useState } from 'react';
-import '../pages/css/led.css'; // Import CSS styles
+import '../pages/css/home.css';
 
 const TableLampsPage = () => {
     const [products, setProducts] = useState([]);
@@ -22,6 +23,10 @@ const TableLampsPage = () => {
             });
     }, []);
 
+    const handleCharity = () =>{
+        window.location.href = "/charity";
+    }
+    
     const handleAddToCart = (productId, brand, image, productType, price) => {
         // Update local cart state
         const updatedCart = [...cart, { productId, brand, image, productType, price }];
@@ -62,6 +67,14 @@ const TableLampsPage = () => {
                                 onClick={() => handleAddToCart(product._id, product.Brand, product.Image, product["Product Type"], product.Price)}
                             >
                                 Add to Cart
+                            </button>
+                            <br />
+                            <br />
+                            <button 
+                                className="charity-button"
+                                onClick={() => handleCharity()}
+                            >
+                                Charity
                             </button>
                         </div>
                     </div>
