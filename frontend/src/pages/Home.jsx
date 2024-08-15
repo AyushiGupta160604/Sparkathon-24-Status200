@@ -1,5 +1,6 @@
+
 import React, { useEffect, useState } from 'react';
-import '../pages/css/led.css'; // Import CSS styles
+import '../pages/css/home.css';
 
 const HomePage = () => {
     const [products, setProducts] = useState([]);
@@ -21,6 +22,10 @@ const HomePage = () => {
                 console.error('Error fetching data:', error);
             });
     }, []);
+
+    const handleCharity = () =>{
+        window.location.href = "/charity";
+    }
 
     const handleAddToCart = (productId, brand, image, productType, price) => {
         // Update local cart state
@@ -63,13 +68,21 @@ const HomePage = () => {
                             >
                                 Add to Cart
                             </button>
+                           <br /> 
+                           <br />
+                            <button 
+                                className="charity-button"
+                                onClick={() => handleCharity()}
+                            >
+                                Charity
+                            </button>
                         </div>
                     </div>
                 ))}
             </main>
 
             <footer>
-                <p>&copy; 2024 Humble Home. All rights reserved.</p>
+                <p>&copy; 2024 All rights reserved.</p>
             </footer>
         </div>
     );
