@@ -54,26 +54,27 @@ This project is a comprehensive enhancement to the Walmart website, offering use
    git clone https://github.com/your-repo.git
    cd your-repo
    
-2. **Frontend Dependencies Installation**
+2. **Frontend Dependencies Installation**:
 ```bash
 # Navigate to the frontend directory
 cd frontend
-```bash
+
 # Install the necessary dependencies
 npm install
-```bash
+
 # Start the development server
 npm run dev
 
 
-3. **Install Backend Dependencies**
+
+3. **Install Backend Dependencies**:
 ```bash
 # Navigate to the backend directory
 cd ../backend
-```bash
+
 # Install the necessary dependencies
 npm install
-```bash
+
 # Start the backend server
 npm start
 
