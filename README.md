@@ -61,33 +61,37 @@ This project is a comprehensive enhancement to the Walmart website, offering use
    npm install
    
 2. **Frontend Dependencies Installation**:
-```bash
-- Navigate to the frontend directory
-  cd frontend 
+   - Navigate to the frontend directory
+     ```bash
+     cd frontend 
 
-3. **Install the necessary dependencies**
-```bash
-npm install
-
-4. **Start the development server**
-```bash
-npm run dev
+    - Install the necessary dependencies
+   ```bash
+   npm install
+   ```
+   
+    - Start the development server
+   ```bash
+   npm run dev
 
 
 
 3. **Install Backend Dependencies**:
-```bash
-# Navigate to the backend directory
-cd ../backend
+   - Navigate to the backend directory
+   ```bash
+   cd ../backend
+   ```
 
-# Install the necessary dependencies
-npm install
+   - Install the necessary dependencies
+     ```bash
+      npm install
 
-# Start the backend server
-npm start
+   - Start the backend server
+      ```bash
+      node server.js
 
 4. **Running the Project**
-After setting up both the frontend and backend, the project should be up and running locally. You can access the frontend at `http://localhost:3000` and the backend API endpoints at `http://localhost:5000` (or the respective ports if configured differently).
+After setting up both the frontend and backend, the project should be up and running locally. You can access the frontend at `http://localhost:5173` and the backend API endpoints at `http://localhost:7000` (or the respective ports if configured differently).
 
 Ensure that both servers are running simultaneously to allow proper communication between the frontend and backend.
 
