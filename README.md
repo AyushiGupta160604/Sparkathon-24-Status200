@@ -52,6 +52,8 @@ This project is a comprehensive enhancement to the Walmart website, offering use
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/your-repo.git
+
+``` bash
    cd your-repo
 
    npm install
