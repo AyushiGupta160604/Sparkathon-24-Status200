@@ -210,7 +210,7 @@ exports.LED=async(req,res)=>{
 exports.placeorder = async (req, res) => {
     const {products, cart, address, paymentMethod } = req.body;
 
-    console.log('Received Data:', { products, cart, address, paymentMethod });
+    console.log('Received Data:', { cart, address, paymentMethod });
 
     try {
         if (!cart || !address || !paymentMethod) {
@@ -224,7 +224,6 @@ exports.placeorder = async (req, res) => {
 
         const order = new Order({
             user: req.user.userId,
-            products,
             cart,
             address,
             paymentMethod,
