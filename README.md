@@ -61,12 +61,14 @@ This project is a comprehensive enhancement to the Walmart website, offering use
 2. **Frontend Dependencies Installation**:
 ```bash
 - Navigate to the frontend directory
-  cd frontend ```
+  cd frontend 
 
-- Install the necessary dependencies
+3. **Install the necessary dependencies**
+```bash
 npm install
 
-# Start the development server
+4. **Start the development server**
+```bash
 npm run dev
 
 
