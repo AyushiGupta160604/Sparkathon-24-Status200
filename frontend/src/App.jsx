@@ -7,6 +7,8 @@ import Profile from "./pages/profile";
 import LED from "./pages/led"
 import NavBar from './pages/NavBar';
 import Cart from './pages/Cart';
+import Charity from './pages/Charity';
+import Contact from './pages/Contact';
 const App = () => {
   const [data, setData] = useState(null);
 
@@ -27,6 +29,8 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/products" element={<LED/>}/>
         <Route path="/cart" element={<Cart />} />
+        <Route path="/charity" element={<Charity />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </Router>
   );
