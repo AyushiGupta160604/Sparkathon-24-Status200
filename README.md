@@ -5,7 +5,7 @@
 This project is a comprehensive enhancement to the Walmart website, offering users a more interactive and inclusive shopping experience. It combines frontend and backend development with a powerful classification model to improve customer feedback, a Chrome extension to assist colorblind users, and unique features like credit rewards for useful feedback and donation options.
 
 ## **Prototype**
-#[prototype](https://youtu.be/ofog5rthYbU)
+[prototype](https://youtu.be/ofog5rthYbU)
 
 ## **Features**
 
